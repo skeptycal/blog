@@ -1,0 +1,84 @@
+#!/usr/bin/env bash
+###############################################################################
+    # gh - script to automate github setup and commits
+    #
+    # Usage: gh [commit_message]
+    #
+    # Parameters: optional commit message used for git commit -m
+    #   (several standard commit messages are available, also)
+    #
+    # @author    Michael Treanor  <skeptycal@gmail.com>
+    # @copyright 2019 © Michael Treanor
+    # @license   MIT <https://opensource.org/licenses/MIT>
+    # @link      http://www.github.com/skeptycal
+    #
+    ###########################################################################
+
+##### Default Commit Message #####
+# Set commit_message to use a default commit message for automated testing
+# ** NOT best practice ... NOT for public or production use
+# Set to "" to enable normal operation (require message)
+# commit_message=""
+commit_message="default bypass message: formatting and minor adjustments"
+
+# standard commit messages: (i.e. <usage gh 1> to use message 1 below)
+cm[1]="initial commit"
+cm[2]="fix formatting"
+cm[3]="restructure directory tree"
+cm[4]="refactor minor portions"
+cm[5]="update database or API connector"
+cm[6]="add updated data files"
+cm[7]="update outside requirements (PIP, NPM, etc)"
+cm[8]="update framework version"
+cm[9]="update language version (python, php, etc)"
+
+# if $1 is set, use it
+if [ -n "$1" ]; then
+    # If $1 is a single digit, use the ${cm[]} array
+    # otherwise just use $1
+    # if [[ $goodstring =~ $pattern ]];
+    if [[ "$1" =~ '[0..9]' ]]; then
+        echo "RE matches $1"
+        commit_message=${cm[$1]}
+        echo "REGEX caught a digit ..."
+    else
+        commit_message="$1"
+    fi
+# if no default commit_message, ask
+elif [ -z "$commit_message" ]; then
+    read -p "-> Enter commit message: " commit_message
+fi
+
+echo "Your commit message is: $commit_message"
+
+exit 1; # ! Testing
+
+echo "Continue? (Y/n)"
+read N1 yes_no
+if "$yes_no" in [Nn]; then
+    echo -e "-> Exiting ..."
+    exit 1
+fi
+
+exit 1; # ! Testing
+
+# Check for Git, Git Repo, and hub
+command -v git &>/dev/null && brew install git
+command -v git status &>/dev/null && git init
+command -v hub &>/dev/null && brew install hub
+
+git add --all
+git commit -m "$commit_message"
+if [ -z ]
+
+# destroy array that is no longer needed
+# unset $cm
+# unset $commit_message
+
+
+##### References #####
+# https://mathblog.com/regular-expressions-for-numbers-in-bash/
+
+# How to Extract Numbers from Text using Regular Expressions in BASH
+
+# This short script demonstrate how to use the regular expressions for numbers to extract numbers and numeric data from unstructured text, a common problem in this age of the Internet. Note that bash stores the first matched sub-pattern indicated by enclosing parenthesis in the regular expression in the special variable BASH_REMATCH[1]
